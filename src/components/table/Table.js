@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useTable, useFilters, useSortBy } from "react-table";
 
+
 export default function Table({ columns, data }) {
   const [titleFilterInput, setTitleFilterInput] = useState("");
   const [sicFilterInput, setSicFilterInput] = useState("");
@@ -76,6 +77,7 @@ export default function Table({ columns, data }) {
                     <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
                   );
                 })}
+                <button>Add to cart</button>
               </tr>
             );
           })}
