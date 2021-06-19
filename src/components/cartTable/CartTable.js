@@ -1,18 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 import { useTable, useFilters, useSortBy } from "react-table";
 
 
-export default function Table({ columns, data, addItem }) {
-  const [titleFilterInput, setTitleFilterInput] = useState("");
-  const [sicFilterInput, setSicFilterInput] = useState("");
-
+export default function CartTable({ columns, data, removeItem }) {
   const {
     getTableProps,
     getTableBodyProps,
     headerGroups,
     rows,
-    prepareRow,
-    setFilter
+    prepareRow
   } = useTable(
     {
       columns,
@@ -22,31 +18,9 @@ export default function Table({ columns, data, addItem }) {
     useSortBy
   );
 
-  const handleTitleFilterChange = e => {
-    const value = e.target.value || undefined;
-    setFilter("title", value);
-    setTitleFilterInput(value);
-  };
-
-  const handleSICFilterChange = e => {
-    const value = e.target.value || undefined;
-    setFilter("sic_code", value);
-    setSicFilterInput(value);
-  };
-
 
   return (
     <>
-      <input
-        value={titleFilterInput}
-        onChange={handleTitleFilterChange}
-        placeholder={"Search by Title"}
-      />
-      <input
-        value={sicFilterInput}
-        onChange={handleSICFilterChange}
-        placeholder={"Search by SIC code"}
-      />
       <table {...getTableProps()}>
         <thead>
           {headerGroups.map(headerGroup => (
@@ -62,7 +36,6 @@ export default function Table({ columns, data, addItem }) {
                       : ""
                   }
                 >
-                  {column.render("Header")}
                 </th>
               ))}
             </tr>
@@ -78,7 +51,7 @@ export default function Table({ columns, data, addItem }) {
                     <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
                   );
                 })}
-                <button onClick={(e) => addItem(row)}>Add to cart</button>
+                <button onClick={(e) => removeItem(row)}>Remove from cart</button>
               </tr>
             );
           })}
