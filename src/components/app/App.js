@@ -50,7 +50,7 @@ function App() {
     <div className="App">
       <button onClick={() =>  setShow(true)}>View Cart</button>
       <CartModal onClose={() => setShow(false)} cartData={cartData} removeItem={removeItem} show={show}/>
-      <Table columns={columns} data={data} cartData={cartData} addItem={addItem} />
+      <Table columns={columns} data={data} addItem={addItem} />
     </div>
   );
 }
