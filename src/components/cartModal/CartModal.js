@@ -2,7 +2,7 @@ import React, { useMemo } from 'react'
 import "../app/App.css";
 import CartTable from "../cartTable/CartTable";
 
-const CartModal = props => {    
+const CartModal = ({cartData, onClose, removeItem, show}) => {    
     const columns = useMemo(
         () => [
           {
@@ -22,21 +22,21 @@ const CartModal = props => {
         []
     );
 
-    if (!props.show) {
+    if (!show) {
         return null
     }
 
     return (
-        <div className="modal" onClick={props.onClose}>
+        <div className="modal" onClick={onClose}>
             <div clasName="modal-content" onClick={e => e.stopPropagation()}>
                 <div className="modal-header">
                     <h4 className="modal-title">Cart</h4>
                 </div>
                 <div className="modal-body">
-                    <CartTable columns={columns} data={props.cartData} removeItem={props.removeItem}/>
+                    <CartTable columns={columns} data={cartData} removeItem={removeItem}/>
                 </div>
                 <div className="modal-footer">
-                    <button onClick={props.onClose} className="button">Close</button>
+                    <button onClick={onClose} className="button">Close</button>
                 </div>
             </div>
         </div>

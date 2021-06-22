@@ -2,7 +2,7 @@ import React from "react";
 import { useTable, useFilters, useSortBy } from "react-table";
 
 
-export default function CartTable({ columns, data, removeItem }) {
+export default function CartTable({columns, data, removeItem}) {
   const {
     getTableProps,
     getTableBodyProps,
