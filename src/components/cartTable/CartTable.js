@@ -1,31 +1,25 @@
+import { useFilters, useSortBy, useTable } from "react-table";
+
 import React from "react";
-import { useTable, useFilters, useSortBy } from "react-table";
 
-
-export default function CartTable({columns, data, removeItem}) {
-  const {
-    getTableProps,
-    getTableBodyProps,
-    headerGroups,
-    rows,
-    prepareRow
-  } = useTable(
-    {
-      columns,
-      data
-    },
-    useFilters,
-    useSortBy
-  );
-
+export default function CartTable({ columns, data, removeItem }) {
+  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
+    useTable(
+      {
+        columns,
+        data,
+      },
+      useFilters,
+      useSortBy
+    );
 
   return (
     <>
       <table {...getTableProps()}>
         <thead>
-          {headerGroups.map(headerGroup => (
+          {headerGroups.map((headerGroup) => (
             <tr {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map(column => (
+              {headerGroup.headers.map((column) => (
                 <th
                   {...column.getHeaderProps(column.getSortByToggleProps())}
                   className={
@@ -35,8 +29,7 @@ export default function CartTable({columns, data, removeItem}) {
                         : "sort-asc"
                       : ""
                   }
-                >
-                </th>
+                ></th>
               ))}
             </tr>
           ))}
@@ -46,12 +39,14 @@ export default function CartTable({columns, data, removeItem}) {
             prepareRow(row);
             return (
               <tr {...row.getRowProps()}>
-                {row.cells.map(cell => {
+                {row.cells.map((cell) => {
                   return (
                     <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
                   );
                 })}
-                <button onClick={(e) => removeItem(row)}>Remove from cart</button>
+                <button onClick={(e) => removeItem(row)}>
+                  Remove from cart
+                </button>
               </tr>
             );
           })}

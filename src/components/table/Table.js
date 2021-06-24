@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { useTable, useFilters, useSortBy } from "react-table";
-
+import { useFilters, useSortBy, useTable } from "react-table";
 
 export default function Table({ columns, data, addItem }) {
   const [titleFilterInput, setTitleFilterInput] = useState("");
@@ -12,28 +11,27 @@ export default function Table({ columns, data, addItem }) {
     headerGroups,
     rows,
     prepareRow,
-    setFilter
+    setFilter,
   } = useTable(
     {
       columns,
-      data
+      data,
     },
     useFilters,
     useSortBy
   );
 
-  const handleTitleFilterChange = e => {
+  const handleTitleFilterChange = (e) => {
     const value = e.target.value || undefined;
     setFilter("title", value);
     setTitleFilterInput(value);
   };
 
-  const handleSICFilterChange = e => {
+  const handleSICFilterChange = (e) => {
     const value = e.target.value || undefined;
     setFilter("sic_code", value);
     setSicFilterInput(value);
   };
-
 
   return (
     <>
@@ -49,9 +47,9 @@ export default function Table({ columns, data, addItem }) {
       />
       <table {...getTableProps()}>
         <thead>
-          {headerGroups.map(headerGroup => (
+          {headerGroups.map((headerGroup) => (
             <tr {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map(column => (
+              {headerGroup.headers.map((column) => (
                 <th
                   {...column.getHeaderProps(column.getSortByToggleProps())}
                   className={
@@ -73,7 +71,7 @@ export default function Table({ columns, data, addItem }) {
             prepareRow(row);
             return (
               <tr {...row.getRowProps()}>
-                {row.cells.map(cell => {
+                {row.cells.map((cell) => {
                   return (
                     <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
                   );
