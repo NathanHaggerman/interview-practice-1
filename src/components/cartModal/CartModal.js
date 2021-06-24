@@ -24,11 +24,7 @@ const CartModal = ({ cartData, onClose, removeItem, show }) => {
     []
   );
 
-  if (!show) {
-    return null;
-  }
-
-  return (
+  return show ? (
     <div className="modal" onClick={onClose}>
       <div clasName="modal-content" onClick={(e) => e.stopPropagation()}>
         <div className="modal-header">
@@ -48,7 +44,7 @@ const CartModal = ({ cartData, onClose, removeItem, show }) => {
         </div>
       </div>
     </div>
-  );
+  ) : null;
 };
 
 export default CartModal;
